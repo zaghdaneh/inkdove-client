@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Ink dove</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="ga4 games">
+	<meta name="description" content="Based on the popular game pictionary, Play with your friends using highly customizable word pools in english or french from 
+	an increasing number of themes.">
+	<meta name="keywords"
+		content="Pictionary, Dictionary, sketch, league of legends, lol, hearthstone, hs, Anime, draw, scribble">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/styleLogin.css" />
+	<link rel="icon" type="image/png" sizes="32x32" href="https://cdn.inkdove.com/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="https://cdn.inkdove.com/images/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.inkdove.com/images/favicon/favicon-16x16.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Fraunces&display=swap" rel="stylesheet">
+	<link rel="manifest" href="https://cdn.inkdove.com/images/favicon/manifest.json">
+	<meta name="theme-color" content="#ffffff">
+</head>
+
+
+<body>
+
+	<div class="middle-stuff">
+		<div class="game-title"><img style="max-width: 100%; max-height: 100%;" src="https://cdn.inkdove.com/images/mainTitle-50.png"></div>
+		<div class="loginBox border rounded-lg">
+			<div class="text-center" id="loading-log">
+				<div class="spinner-border text-info" role="status">
+					<span class="sr-only">Loading...</span>
+				</div>
+			</div>
+			<div id="login-p">
+				<div class="row-aligned">
+					<div class="form-group">
+						<label for="username">Username:</label>
+						<input type="text" class="form-control logInp" id="username-input" placeholder="Enter username"
+							name="username">
+						<div class="invalid-feedback">Incorrect login or password</div>
+					</div>
+					<div class="form-group">
+						<label for="password">Password:</label>
+						<input type="password" class="form-control logInp" id="password-input"
+							placeholder="Enter password" name="password">
+						<div class="invalid-feedback">Incorrect password</div>
+					</div>
+				</div>
+				<div style="text-align:center;"><button type="button" id="login-but"
+						class="btn btn-outline-custom logInp" style="margin-right: 20px;">Login</button>
+					<button type="button" id="createacc-but" class="btn btn-outline-custom logInp">Create an
+						account</button>
+				</div>
+				<p class="clickable" id="repwdreqbtn" style="color: #DEF2F1;">Lost your password?</p>
+				<div class="social-row">
+					<a href="https://discord.gg/mgTNbJ76Ah" target="_blank" style="height: 24px">
+						<img class="social-icon" src="https://cdn.inkdove.com/images/social/discord.png" data-toggle="tooltip"
+							data-placement="top" title="Dictionary">
+					</a>
+				</div>
+			</div>
+			<div id="register-p">
+				<div class="row-aligned">
+					<div class="form-group">
+						<label for="Rusername">Username:</label>
+						<input type="text" class="form-control regInp" id="RusernameInp" placeholder="Enter username"
+							name="Rusername">
+						<div class="invalid-feedback" id="reg-user">please type a username smaller than 10 characters.
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="Remail">Email:</label>
+						<input type="email" class="form-control regInp" id="RmailInp" placeholder="Enter an email"
+							name="Remail">
+						<div class="invalid-feedback" id="reg-mail">please type a correct mail</div>
+					</div>
+				</div>
+				<div class="row-aligned">
+					<div class="form-group">
+						<label for="Rpassword">Password:</label>
+						<input type="password" class="form-control regInp" id="RPassInp" placeholder="Enter password"
+							name="Rpassword">
+						<div class="invalid-feedback" id="reg-pass">please type a password longer than 4</div>
+					</div>
+					<div class="form-group">
+						<label for="RRpassword">Repeat password:</label>
+						<input type="password" class="form-control regInp" id="RRpassInp" placeholder="Enter password"
+							name="RRpassword">
+						<div class="invalid-feedback" id="reg-rpass">Non corresponding passwords</div>
+					</div>
+				</div>
+				<div style="text-align:center;"><button type="button" id="register-but"
+						class="btn btn-outline-custom regInp" style="margin-right: 20px;">Register</button>
+					<button type="button" id="cancel-but" class="btn btn-outline-custom regInp ">Cancel</button>
+				</div>
+			</div>
+			<div id="Reset-p">
+				<div class="form-group">
+					<label for="email">Please type your email:</label>
+					<input type="email" class="form-control resetInp" id="resetpwd-mail-inp"
+						placeholder="Type your email" name="email">
+					<div class="invalid-feedback">Invalid email</div>
+				</div>
+				<div style="text-align:center;"><button type="button" id="sendresetpwd-but" style="margin-right: 20px;"
+						class="btn btn-outline-custom resetInp">Send</button>
+					<button type="button" id="cancel-resetpwd-but"
+						class="btn btn-outline-custom resetInp">Cancel</button>
+				</div>
+				<div>You will receive steps to reset your password on your email.</div>
+			</div>
+			<div id="Typenewp-p" style="margin-top: 10px">
+				<div class="row-aligned">
+					<div class="form-group">
+						<label for="password">New Password:</label>
+						<input type="password" class="form-control newpInp" id="reset-password-input"
+							placeholder="Enter password" name="password">
+						<div class="invalid-feedback">Incorrect password</div>
+					</div>
+					<div class="form-group">
+						<label for="rpassword">Repeat new Password:</label>
+						<input type="password" class="form-control newpInp" id="reset-Rpassword-input"
+							placeholder="Enter password" name="rpassword">
+						<div class="invalid-feedback">non corresponding passwords</div>
+					</div>
+				</div>
+				<div style="text-align:center;">
+					<button type="button" id="sendnp-but" class="btn btn-outline-danger newpInp">Send</button>
+				</div>
+
+			</div>
+		</div>
+		<div class="footer">
+			<div>What is Ink Dove ?</div>
+			<div>Based on the popular game pictionary, Ink Dove focuses on offering easy ways to generate different
+				themed word lists</div>
+			<div>Supported themes :</div>
+			<div class="row-aligned">
+				<div style="text-align: center;">
+					<img class="icon-format" src="https://cdn.inkdove.com/images/themes/dic.png" data-toggle="tooltip" data-placement="top"
+						title="Dictionary">
+					<div class="title">Dictionnary</div>
+				</div>
+				<div style="text-align: center;">
+					<img class="icon-format" src="https://cdn.inkdove.com/images/themes/lol.png" data-toggle="tooltip" data-placement="top"
+						title="Dictionary">
+					<div class="title">League of legends</div>
+				</div>
+				<div style="text-align: center;">
+					<img class="icon-format" src="https://cdn.inkdove.com/images/themes/hs.png" data-toggle="tooltip" data-placement="top"
+						title="Dictionary">
+					<div class="title">Hearthstone</div>
+				</div>
+				<div style="text-align: center;">
+					<img class="icon-format" src="https://cdn.inkdove.com/images/themes/an.png" data-toggle="tooltip" data-placement="top"
+						title="Dictionary">
+					<div class="title">Anime</div>
+				</div>
+			</div>
+			<div class="footerbox" style="margin-top: 50px;">
+				<div class="footer-column">
+					<div class="footer-title">Contact</div>
+					<a href="https://discord.gg/mgTNbJ76Ah" target="_blank" class="footer-link">Discord</a>
+					<a href="" target="_blank" class="footer-link">Twitter</a>
+				</div>
+				<div class="footer-column">
+					<div class="footer-title">About</div>
+					<a href="www.inkdove.com/termsofuse" target="_blank" class="footer-link">Terms of use</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!-- Jquery-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script><!-- popper-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script><!-- Bootsrap-->
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+	<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+	<script src="https://cdn.inkdove.com/script/login.min.js"></script>
+</body>
+
+</html>

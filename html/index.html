@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Ink dove</title>
+	<meta name="author" content="ga4 games">
+	<meta name="description" content="Based on the popular game pictionary, Play with your friends using highly customizable word pools in english or french from 
+	an increasing number of themes.">
+	<meta name="keywords" content="Pictionary, Dictionary, sketch, league of legends, lol, hearthstone, hs, Anime, draw, scribble">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="icon" type="image/png" sizes="32x32" href="https://cdn.inkdove.com/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="https://cdn.inkdove.com/images/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.inkdove.com/images/favicon/favicon-16x16.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Fraunces&display=swap" rel="stylesheet">
+	<link rel="manifest" href="https://cdn.inkdove.com/images/favicon/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="https://cdn.inkdove.com/images/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
+</head>
+
+
+<body>
+
+	<div class="container-fluid">
+		<div id="loading-screen" class="over-top-window lockscreen" style="z-index: 30;">
+			<div class="mid-screen" id="ls-err">
+				<div class="spinner-border text-info" role="status">
+				</div>
+			</div>
+		</div>
+		<div id="top-window" class="over-top-window" style="z-index: 20;display: none;">
+			<div id="BC-box" class="mid-screen center-box" style="display:none;">
+				
+				<div id="room-settings" class="settings-with-navbar" style="display:none;">
+					<div class="navbar-settings">
+						<button type="button" id="rs-general-nav" class="nav_btn highlightedNav">General</button>
+						<button type="button" id="rs-dic-nav" class="nav_btn">Dictionary</button>
+						<button type="button" id="rs-anime-nav" class="nav_btn">Anime</button>
+						<button type="button" id="rs-lol-nav" class="nav_btn">League of legends</button>
+						<button type="button" id="rs-hs-nav" class="nav_btn">Hearthstone</button>
+					</div>
+					<div id="right-window" class="settings-tab">
+						<div id="rs-general" class="gen-settings-layout">
+							<div class="centered-title">
+								<p class="centrered-title-font" style="font-size: 24px;">General settings</p>
+							</div>
+							<div class="form-group">
+								<label for="room_name">Room name:</label>
+								<input type="text" class="form-control rs-vals" id="rs-name" placeholder="Room name ..."
+									name="name">
+								<div class="invalid-feedback">please type a name smaller than X characters.</div>
+							</div>
+							<div class="lockandPassword">
+								<div class="form-group toplabel" style="margin-right: 20px;">
+									<label for="locked">Lock</label>
+									<div class="midCheckBox"><input class="rs-vals" id="rs-locked" name="locked"
+											type="checkbox" class="form-check-input"
+											style="width: 18px; height:18px; margin:0; padding-right:5px;"></div>
+								</div>
+								<div class="form-group" style="width:80%;">
+									<label for="rs-password">Password:</label>
+									<input type="text" class="form-control logInp rs-vals" id="rs-password"
+										placeholder="Enter password" name="password">
+									<div class="invalid-feedback">please type a name smaller than 30 characters.</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<!--Number of rounds-->
+								<label for="roundoptions">Rounds:</label>
+								<select class="form-control form-control-sm rs-vals" name="rounds" id="rs-rounds">
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option selected value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<!--length of round-->
+								<label for="rs-drawtime">Draw time:</label>
+								<select class="form-control form-control-sm rs-vals" id="rs-drawtime" name="drawtime">
+									<option value="30">30</option>
+									<option value="60">60</option>
+									<option selected value="80">80</option>
+									<option value="160">160</option>
+								</select>
+							</div>
+							<div class="form-group" id="choose-dic-lan">
+								<!--choose box when true-->
+								<label for="rs-lang">Language:</label>
+								<select class="form-control form-control-sm rs-vals" id="rs-lang" name="lang">
+									<option selected value="0">English</option>
+									<option value="1">Français</option>
+								</select>
+							</div>
+							<div class="form-check">
+								<label class="form-check-label">
+									<input id="rs-showwordtype" type="checkbox" class="form-check-input rs-vals"
+										name="showwordtype" checked>Show word type
+								</label>
+							</div>
+							<div class="form-check">
+								<label class="form-check-label">
+									<input id="rs-showhint" type="checkbox" class="form-check-input rs-vals"
+										name="showhint" checked>Show hints
+								</label>
+							</div>
+							<div class="form-check">
+								<label class="form-check-label">
+									<input id="rs-showguess" type="checkbox" class="form-check-input rs-vals"
+										name="showguess">Show wrong guesses
+								</label>
+							</div>
+							
+
+						</div>
+						<div id="rs-dic" class="gen-settings-layout" style="display: none;">
+							<div class="centered-title">
+								<div class="form-check">
+									<input id="rs-di_enabled" type="checkbox" class="form-check-input rs-vals"
+										name="di_enabled" checked>
+									<label class="form-check-label" for="rs-di_enabled">Use Dictionary</label>
+								</div>
+							</div>
+							<p class="optionTitle">Type:</p>
+							<div class="double-equals-columns" id="rs-di_type">
+								<div class="forms-half">
+									<div class="form-check">
+										<input id="rs-di_words" type="checkbox" class="form-check-input rs-vals"
+											value='0' name="!di_type" checked>
+										<label class="form-check-label" for="rs-di_countries" checked>Use random
+											nouns/verbs</label>
+									</div>
+									<div class="form-check">
+										<input id="rs-di_countries" type="checkbox" class="form-check-input rs-vals"
+											value='1' name="!di_type" checked>
+										<label class="form-check-label" for="rs-di_countries">Use Countries</label>
+									</div>
+								</div>
+								<div class="forms-half">
+								</div>
+							</div>
+
+
+
+						</div>
+						<div id="rs-anime" class="gen-settings-layout" style="display: none;">
+							<div class="centered-title">
+								<div class="form-check">
+									<label class="form-check-label">
+										<input id="rs-an_enabled" type="checkbox" class="form-check-input rs-vals"
+											name="an_enabled" checked>Use Anime
+									</label>
+								</div>
+							</div>
+							<div class="form-check">
+								<label class="form-check-label">
+									<input id="rs-an_shared" type="checkbox" class="form-check-input rs-vals"
+										name="an_shared" checked>use only
+									shared Anime
+								</label>
+							</div>
+							<div class="form-check">
+								<label class="form-check-label">
+									<input id="rs-an_sequel" type="checkbox" class="form-check-input rs-vals"
+										name="an_sequel" checked>Allow
+									sequels
+								</label>
+							</div>
+							<p class="optionTitle">Format:</p>
+							<div class="double-equals-columns" id="rs-an_format">
+								<div class="forms-half">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_f_TV" type="checkbox" name="!an_format" value="0"
+												class="form-check-input rs-vals" checked> TV
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_f_Movie" type="checkbox" name="!an_format" value="2"
+												class="form-check-input rs-vals" checked> Movie
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_f_OVA" type="checkbox" name="!an_format" value="4"
+												class="form-check-input rs-vals"> OVA
+										</label>
+									</div>
+								</div>
+								<div class="forms-half">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_f_TV_Short" type="checkbox" name="!an_format" value="1"
+												class="form-check-input rs-vals" checked> TV Short
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_f_Special" type="checkbox" name="!an_format" value="3"
+												class="form-check-input rs-vals"> Special
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_f_ONA" type="checkbox" name="!an_format" value="5"
+												class="form-check-input rs-vals"> ONA
+										</label>
+									</div>
+								</div>
+							</div>
+							<p class="optionTitle">Years:</p>
+							<div class="double-equals-columns">
+								<div class="forms-half">
+									<div class="whole-line">
+										<p>from:</p>
+										<select class="form-control rs-valsCs small-form" id="rs-an_froms"
+											name="an_froms">
+											<option selected value="0">Winter</option>
+											<option value="1">Spring</option>
+											<option value="2">Summer</option>
+											<option value="3">Fall</option>
+										</select>
+										<input type="number" class="form-control rs-valsCs IntInp small-form" step="1"
+											id="rs-an_fromy" placeholder="Year" min="1940" max="2020" value="1940"
+											name="an_fromy">
+									</div>
+								</div>
+								<div class="forms-half">
+									<div class="whole-line">
+										<p>To:</p>
+										<select class="form-control rs-valsCs small-form" id="rs-an_tos" name="an_tos">
+											<option value="0">Winter</option>
+											<option value="1">Spring</option>
+											<option value="2">Summer</option>
+											<option selected value="3">Fall</option>
+										</select>
+										<input type="number" class="form-control rs-valsCs IntInp small-form" step="1"
+											id="rs-an_toy" placeholder="Year" min="1940" max="2020" value="2020"
+											name="an_toy">
+									</div>
+								</div>
+							</div>
+							<p class="optionTitle">Banned Genres:</p>
+							<div class="double-equals-columns" id="rs-an_genre">
+								<div class="forms-half">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_action" type="checkbox" name="!an_genre" value="0"
+												class="form-check-input rs-vals"> Action
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Comedy" type="checkbox" name="!an_genre" value="2"
+												class="form-check-input rs-vals"> Comedy
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Ecchi" type="checkbox" name="!an_genre" value="4"
+												class="form-check-input rs-vals"> Ecchi
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Horror" type="checkbox" name="!an_genre" value="7"
+												class="form-check-input rs-vals"> Horror
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Mecha" type="checkbox" name="!an_genre" value="9"
+												class="form-check-input rs-vals"> Mecha
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Mystery" type="checkbox" name="!an_genre" value="11"
+												class="form-check-input rs-vals"> Mystery
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Romance" type="checkbox" name="!an_genre" value="13"
+												class="form-check-input rs-vals"> Romance
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Slice_of_Life" type="checkbox" name="!an_genre"
+												value="15" class="form-check-input rs-vals"> Slice of Life
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Supernatural" type="checkbox" name="!an_genre" value="17"
+												class="form-check-input rs-vals"> Supernatural
+										</label>
+									</div>
+
+								</div>
+								<div class="forms-half">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Adventure" type="checkbox" name="!an_genre" value="1"
+												class="form-check-input rs-vals"> Adventure
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Drama" type="checkbox" name="!an_genre" value="3"
+												class="form-check-input rs-vals"> Drama
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Fantasy" type="checkbox" name="!an_genre" value="5"
+												class="form-check-input rs-vals"> Fantasy
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Mahou_Shoujo" type="checkbox" name="!an_genre" value="8"
+												class="form-check-input rs-vals"> Mahou Shoujo
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Music" type="checkbox" name="!an_genre" value="10"
+												class="form-check-input rs-vals"> Music
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Psychological" type="checkbox" name="!an_genre"
+												value="12" class="form-check-input rs-vals"> Psychological
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Sci-Fi" type="checkbox" name="!an_genre" value="14"
+												class="form-check-input rs-vals"> Sci-Fi
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Sports" type="checkbox" name="!an_genre" value="16"
+												class="form-check-input rs-vals"> Sports
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-an_g_Thriller" type="checkbox" name="!an_genre" value="18"
+												class="form-check-input rs-vals"> Thriller
+										</label>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+						<div id="rs-lol" class="gen-settings-layout" style="display: none;">
+							<div class="centered-title">
+								<div class="form-check">
+									<label class="form-check-label">
+										<input id="rs-lol_enabled" type="checkbox" class="form-check-input rs-vals"
+											name="lol_enabled" checked>Use
+										league of legends
+									</label>
+								</div>
+							</div>
+							<p class="optionTitle">Type:</p>
+							<div class="double-equals-columns" id="rs-lol_type">
+								<div class="forms-half">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-lol_champs" type="checkbox" class="form-check-input rs-vals"
+												name="!lol_type" value="0" checked> Champions
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-lol_items" type="checkbox" class="form-check-input rs-vals"
+												name="!lol_type" value="1" checked> Items
+										</label>
+									</div>
+								</div>
+								<div class="forms-half">
+
+								</div>
+							</div>
+						</div>
+						<div id="rs-hs" class="gen-settings-layout" style="display: none;">
+							<div class="centered-title">
+								<div class="form-check">
+									<label class="form-check-label">
+										<input name="hs_enabled" type="checkbox" class="form-check-input rs-vals"
+											id="rs-hs_enabled" checked>Use
+										Hearthstone
+									</label>
+								</div>
+							</div>
+							<p class="optionTitle">Card rarity:</p>
+							<div class="double-equals-columns" id="rs-hs_rarity">
+								<div class="forms-half">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_r_free" type="checkbox" name="!hs_rarity" value="0"
+												class="form-check-input rs-vals" checked> Free
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_r_common" type="checkbox" name="!hs_rarity" value="1"
+												class="form-check-input rs-vals" checked> Common
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_r_rare" type="checkbox" name="!hs_rarity" value="2"
+												class="form-check-input rs-vals" checked> Rare
+										</label>
+									</div>
+								</div>
+								<div class="forms-half">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_r_epic" type="checkbox" name="!hs_rarity" value="3"
+												class="form-check-input rs-vals" checked> Epic
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_r_legend" type="checkbox" name="!hs_rarity" value="4"
+												class="form-check-input rs-vals" checked> legendary
+										</label>
+									</div>
+								</div>
+							</div>
+							<p class="optionTitle">Card Type:</p>
+							<div class="double-equals-columns" id="rs-hs_type">
+								<div class="forms-half">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_t_hero" type="checkbox" name="!hs_type" value="0"
+												class="form-check-input rs-vals"> Hero
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_t_minion" type="checkbox" name="!hs_type" value="1"
+												class="form-check-input rs-vals" checked> Minion
+										</label>
+									</div>
+								</div>
+								<div class="forms-half">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_t_spell" type="checkbox" name="!hs_type" value="2"
+												class="form-check-input rs-vals" checked> Spell
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_t_weap" type="checkbox" name="!hs_type" value="3"
+												class="form-check-input rs-vals" checked> Weapon
+										</label>
+									</div>
+								</div>
+							</div>
+							<p class="optionTitle">Card Sets:</p>
+							<div class="double-equals-columns" id="rs-hs_set">
+								<div class="forms-half">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_basic" type="checkbox" value="0"
+												class="form-check-input rs-vals" name="!hs_set" checked> Basic
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_bg" type="checkbox" value="24"
+												class="form-check-input rs-vals" name="!hs_set"> Battlegrounds
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_naxx" type="checkbox" value="2"
+												class="form-check-input rs-vals" name="!hs_set"> Naxxrammas
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_blackmoun" type="checkbox" value="4"
+												class="form-check-input rs-vals"> Blackrock Mountain
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_tloe" type="checkbox" value="6"
+												class="form-check-input rs-vals" name="!hs_set"> The League of Explorers
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_onik" type="checkbox" name="!hs_set" value="8"
+												class="form-check-input rs-vals"> One Night in Karazhan
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_jtug" type="checkbox" value="10"
+												class="form-check-input rs-vals" name="!hs_set"> Journey to Un'Goro
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_kac" type="checkbox" class="form-check-input rs-vals"
+												name="!hs_set" value="12">
+											Kobolds & Catacombs
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_tbp" type="checkbox" value="14"
+												class="form-check-input rs-vals" name="!hs_set">The Boomsday Project
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_ros" type="checkbox" class="form-check-input rs-vals"
+												name="!hs_set" value="16">
+											Rise of Shadows
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_dod" type="checkbox" value="18"
+												class="form-check-input rs-vals" name="!hs_set">Descent of Dragons
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_dhi" type="checkbox" value="20"
+												class="form-check-input rs-vals">Demon Hunter Initiate
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_scholo" type="checkbox" value="22"
+												class="form-check-input rs-vals" name="!hs_set">Scholomance Academy
+										</label>
+									</div>
+								</div>
+								<div class="forms-half">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_classic" type="checkbox" value="1"
+												class="form-check-input rs-vals" name="!hs_set" checked> Classic
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_gvg" type="checkbox" class="form-check-input rs-vals"
+												name="!hs_set" value="3">
+											Goblins vs Gnomes
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_tgt" type="checkbox" class="form-check-input rs-vals"
+												name="!hs_set" value="5">
+											The Grand Tournament
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_wotolg" type="checkbox" value="7"
+												class="form-check-input rs-vals" name="!hs_set"> Whispers of the Old
+											Gods
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_msog" type="checkbox" value="9"
+												class="form-check-input rs-vals" name="!hs_set">Mean Streets of
+											Gadgetzan
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_kotft" type="checkbox" value="11"
+												class="form-check-input rs-vals" name="!hs_set"> Knights of the Frozen
+											Throne
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_witch" type="checkbox" value="13"
+												class="form-check-input rs-vals" name="!hs_set">The Witchwood
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_rasta" type="checkbox" value="15"
+												class="form-check-input rs-vals" name="!hs_set">Rastakhan's Rumble
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_sou" type="checkbox" value="17"
+												class="form-check-input rs-vals" name="!hs_set">Saviors of Uldum
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_gala" type="checkbox" value="19"
+												class="form-check-input rs-vals" name="!hs_set">Galakrond's Awakening
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_aoo" type="checkbox" value="21"
+												class="form-check-input rs-vals" name="!hs_set">Ashes of Outland
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input id="rs-hs_mad" type="checkbox" value="23"
+												class="form-check-input rs-vals" name="!hs_set">Madness At The Darkmoon
+											Faire
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="btn-cont">
+							<button type="button" id="save-roomSettings"
+								class="btn btn-outline-custom buttonsStyle rs-vals"
+								style="margin-right: 20px;">Save</button>
+							<button type="button" id="close-roomSettings"
+								class="btn btn-outline-custom buttonsStyle">Close</button>
+						</div>
+					</div>
+				</div>
+				<div id="account-settings" class="settings-with-navbar" style="display: none;">
+					<div class="navbar-settings">
+						<button type="button" id="acc-general-nav" class="highlightedNav nav_btn">General</button>
+						<button type="button" id="acc-anime-nav" class="nav_btn">Anime</button>
+						<button type="button" id="acc-chnpwd-nav" class="nav_btn">Change Password</button>
+						<button type="button" id="acc-bugrep-nav" class="nav_btn">Bug Reporter</button>
+						<button type="button" id="acc-credits-nav" class="nav_btn">Credits</button>
+						<button type="button" id="acc-contact-nav" class="nav_btn">Contact</button>
+					</div>
+					<div id="right-window" class="settings-tab">
+						<div id="acc-general" class="gen-settings-layout">
+							<div class="centered-title">
+								<p class="centrered-title-font" style="font-size: 24px;">General settings</p>
+							</div>
+							<p>Empty for now lul</p>
+						</div>
+						<div id="acc-anime" class="gen-settings-layout" style="display: none;">
+							<div class="centered-title">
+								<p class="centrered-title-font" style="font-size: 24px;">Anime settings</p>
+							</div>
+							<div class="form-group">
+								<label for="an-inp">Username:</label>
+								<input type="text" class="form-control" id="an-inp" placeholder="Anilist username"
+									name="an-inp">
+								<div class="invalid-feedback">please type a name smaller than X characters.</div>
+							</div>
+							<div class="form-group">
+								<label for="an-site">List website:</label>
+								<select class="form-control form-control-sm" id="an-site">
+									<option selected value="0">Myanimelist</option>
+									<option value="1">Anilist</option>
+								</select>
+							</div>
+
+							<div class="centered-title" style="color: #FEFFFF; font-size: 14px; margin-bottom: 3px;">
+								Last
+								updated:&nbsp;<span id="ans-date"> Never</span> </div>
+							<div class="btn-cont">
+								<button class="btn btn-outline-custom" id="updateList-btn" type="button">Update
+									List</button>
+							</div>
+							<div class="btn-cont" id="anupload" style="margin-top: 7px; display: none;">
+								<div class=" centered-title spinner-border text-success"></div>
+							</div>
+
+
+
+						</div>
+						<div id="acc-chnpwd" class="gen-settings-layout" style="display: none;">
+							<div class="centered-title">
+								<p class="centrered-title-font" style="font-size: 24px;">Change password</p>
+							</div>
+							<div class="form-group">
+								<label for="acc-oldpwd">Old password:</label>
+								<input type="password" class="form-control" id="acc-oldpwd" placeholder="Old password">
+								<div class="invalid-feedback">Wrong password.</div>
+							</div>
+							<div class="form-group">
+								<label for="acc-newpwd">New password:</label>
+								<input type="password" class="form-control" id="acc-newpwd" placeholder="New password">
+								<div class="invalid-feedback">Wrong password.</div>
+							</div>
+							<div class="form-group">
+								<label for="acc-newpwdr">Repeat new password:</label>
+								<input type="password" class="form-control" id="acc-newpwdr"
+									placeholder="Repeat new password">
+								<div class="invalid-feedback">Wrong password.</div>
+							</div>
+
+							<div class="btn-cont">
+								<button class="btn btn-outline-custom" id="acc-updatepwd-btn" type="button">Update
+									password</button>
+							</div>
+
+						</div>
+						<div id="acc-bugrep" class="gen-settings-layout" style="display: none;">
+							<div class="centered-title">
+								<p class="centrered-title-font" style="font-size: 24px;">Bug reporter</p>
+							</div>
+							<p>Please type clearly the problem you encountered and how you reached it, you can also
+								report bugs on the discord (link in the contact tab)</p>
+							<div class="form-group">
+								<label for="bugtitle">Bug Title:</label>
+								<input type="text" class="form-control" id="Bug_title_inp"
+									placeholder="Bug title (optional)" name="bugtitle" maxlength="40">
+								<div class="invalid-feedback">Title too long</div>
+							</div>
+							<div class="form-group">
+								<label for="bugDesc">Description (max 400 chars):</label>
+								<textarea class="form-control" id="Bug_Descr_Inp" placeholder="Bug Description"
+									name="bugDesc" maxlength="400" minlength="5" rows="3"></textarea>
+								<div class="invalid-feedback">Description too short or too long</div>
+							</div>
+							<div class="btn-cont">
+								<button class="btn btn-outline-custom" id="sendreportbtn" type="button">Send</button>
+							</div>
+						</div>
+						<div id="acc-credits" class="gen-settings-layout" style="display: none;">
+							<div class="centered-title">
+								<p class="centrered-title-font" style="font-size: 24px;">Credits</p>
+							</div>
+							<p class="optionTitle">Icons:</p>
+							<p>Most icons were made by Freepik, Catalin Fertu, Pixel perfect from <a
+									href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> <br>
+								Rest of icons are made by myself. </p>
+							<p class="optionTitle">Code and design:</p>
+							<p>All css, html, javascript has been written by myself with inspiration from the design of
+								other websites and of course Stackoverflow, no code has been stolen.</p><br>
+							<p>If any credit is missing please contact me</p>
+						</div>
+						<div id="acc-contact" class="gen-settings-layout" style="display: none;">
+							<div class="centered-title">
+								<p class="centrered-title-font" style="font-size: 24px;">Contact</p>
+							</div>
+							<p>If you need to contact me about anything, You can either do it by mail or by discord</p>
+							<br>
+
+							inkdovedev@gmail.com
+							<div class="centered-title" style="margin-bottom: 5px;"><a
+									href="https://discord.gg/mgTNbJ76Ah" target="_blank">
+									<img class="contact-icon" src="https://cdn.inkdove.com/images/social/discord.png" data-toggle="tooltip"
+										data-placement="top" title="Discord">
+								</a></div>
+							<div class="centered-title"><a href="mailto:inkdovedev@gmail.com" target="_blank">
+									<img class="contact-icon" src="https://cdn.inkdove.com/images/social/mail.png" data-toggle="tooltip"
+										data-placement="top" title="Dictionary">
+								</a></div>
+						</div>
+
+
+						<div class="btn-cont">
+							<button type="button"
+								class="btn btn-outline-custom buttonsStyle closewindowBtn">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="SC-box" class="mid-screen center-box-s" style="display:none;">
+				<div id="host-room-w" style="display:none;">
+					<div class="centered-title">
+						<h3 class="centrered-title-font">Host a game</h3>
+					</div>
+					<div class="form-group">
+						<label for="room_name">Room name:</label>
+						<input type="text" class="form-control logInp" id="HR-roomname" placeholder="Room name ..."
+							name="room_name">
+						<div class="invalid-feedback">please type a name smaller than X characters.</div>
+					</div>
+					<div class="lockandPassword">
+						<div class="form-group toplabel" style="margin-right: 20px;">
+							<label for="hr_lock">Lock</label>
+							<div class="midCheckBox"><input id="HR-locked" name="hr_lock" type="checkbox"
+									class="form-check-input"
+									style="width: 18px; height:18px; margin:0; padding-right:5px;"></div>
+						</div>
+						<div class="form-group" style="width:80%;">
+							<label for="room_pass">Password:</label>
+							<input type="text" class="form-control logInp" id="HR-roompass" placeholder="Enter password"
+								name="room_pass" disabled>
+							<div class="invalid-feedback">please type a name smaller than 30 characters.</div>
+						</div>
+					</div>
+
+					<div class="double-equals-columns">
+						<div class="forms-half">
+							<div class="form-check">
+								<label class="form-check-label">
+									<input id="HR-useDic" type="checkbox" class="form-check-input" checked>Use
+									Dictionary
+								</label>
+							</div>
+						</div>
+						<div class="forms-half">
+							<div class="form-group" id="HR-choose-dic-lan"
+								style="margin-left: 60px;margin-bottom: 0px; height:24px;">
+								<!--choose box when true-->
+								<select class="form-control form-control-sm" id="HR-Lan">
+									<option selected value="0">English</option>
+									<option value="1">Français</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="whole-line">
+
+
+					</div>
+					<div class="form-check">
+						<label class="form-check-label">
+							<input id="HR-useAn" type="checkbox" class="form-check-input" checked>Use
+							Anime
+						</label>
+					</div>
+					<div class="form-check">
+						<label class="form-check-label">
+							<input id="HR-useLol" type="checkbox" class="form-check-input" checked>Use league of
+							legends
+						</label>
+					</div>
+					<div class="form-check">
+						<label class="form-check-label">
+							<input id="HR-useHs" type="checkbox" class="form-check-input" checked>Use Hearthstone
+						</label>
+					</div><br>
+					<div class="btn-cont">
+						<button type="button" id="host-but-c"
+							class="btn btn-outline-custom buttonsStyle">Create</button>
+						<button type="button" class="btn btn-outline-custom buttonsStyle closewindowBtn"
+							style="margin-left: 10px;">Cancel</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!--<button>Info</button> -->
+		<div id="roombrowser">
+			<div id="View-topbar" class="topbar tb_xl">
+
+				<div class="top-left">
+					<p>Filters :</p>
+					<div class="btn-group dropdown">
+						<button type="button" class="dropdown-toggle clickableText" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false" style="padding-top: 0; padding-bottom: 0;">
+							Room States
+						</button>
+						<div class="dropdown-menu" style="background-color: #182628; padding-top: 0 !important;">
+							<div class="filter-item"><input id="fi-ingame" type="checkbox"
+									class="form-check-input filterinp" checked>Ingame</div>
+							<div class="filter-item"><input id="fi-locked" type="checkbox"
+									class="form-check-input filterinp" checked>Private</div>
+							<div class="filter-item"><input id="fi-full" type="checkbox"
+									class="form-check-input filterinp" checked>Full</div>
+						</div>
+					</div>
+					<div class="btn-group dropdown">
+						<button type="button" class="dropdown-toggle clickableText" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false" style="padding-top: 0; padding-bottom: 0;">
+							Themes
+						</button>
+						<div class="dropdown-menu" style="background-color: #182628; padding-top: 0 !important;">
+							<div class="filter-item"><input id="fi-di_enabled" type="checkbox"
+									class="form-check-input filterinp" checked>Dictionary</div>
+							<div class="filter-item"><input id="fi-lol_enabled" type="checkbox"
+									class="form-check-input filterinp" checked>Anime</div>
+							<div class="filter-item"><input id="fi-an_enabled" type="checkbox"
+									class="form-check-input filterinp" checked>League of legends</div>
+							<div class="filter-item"><input id="fi-hs_enabled" type="checkbox"
+									class="form-check-input filterinp" checked>Hearthstone</div>
+						</div>
+					</div>
+					<div class="btn-group dropdown">
+						<button type="button" class="dropdown-toggle clickableText" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false" style="padding-top: 0; padding-bottom: 0;">
+							Languages
+						</button>
+						<div class="dropdown-menu" style="background-color: #182628; padding-top: 0 !important;">
+							<div class="filter-item"><input id="fi-0" type="checkbox" class="form-check-input lanfilter"
+									checked>English</div>
+							<div class="filter-item"><input id="fi-1" type="checkbox" class="form-check-input lanfilter"
+									checked>French</div>
+						</div>
+					</div>
+				</div>
+				<button id="hostgame-but" class="top-middle bb_xl bigButton-top">Host game</button>
+				<div class="top-right">
+					<button class="clickableText" id="refreshbutton">Refresh</button>
+					<input type="text" id="roomSearchInp" placeholder="room name ..">
+					<p style="margin-right: 0;">Search:</p>
+
+
+				</div>
+			</div>
+			<div id="View-body">
+				<div id="room-cont">
+
+				</div>
+			</div>
+		</div>
+		<div id="crig">
+			<!--create custom room-->
+			<div class="topbar tb_xl" id="tb-l" style="display:none;">
+				<div class="top-left">
+					<button class="clickableText open-roomSettings">Room Settings</button>
+				</div>
+				<button id="startgame-but" class="top-middle bigButton-top bb_xl ownerButtons">Start game</button>
+				<div class="top-right">
+					<button class="clickableText" id="leave-room-but">Leave Room</button>
+				</div>
+			</div>
+			<div class="topbar tb_S" id="tb-ig">
+				<div class="top-left">
+					<button class="clickableText open-roomSettings">Room Settings</button>
+				</div>
+				<button id="endgame_but" class="top-middle bigButton-top bb_s ownerButtons">Back to lobby</button>
+				<div class="top-right">
+					<button class="clickableText" id="leave-room-but">Leave Room</button>
+					<input type="range" id="volume" min="0" max="100" value="50" class="slider"
+						style="margin-right: 20px;">
+					<img class="volume-icon" src="https://cdn.inkdove.com/images/volume.png">
+				</div>
+			</div>
+			<div class="contentToChat underbar">
+				<div class="lobby-container">
+					<div id="customroom">
+						<div id="players">
+							<div id="container-players">
+
+							</div>
+						</div>
+					</div>
+					<div id="ingame">
+						<div class="ingame-style">
+							<div id="word-hints-container" class="ingame-element ingame-elems-aligner">
+								<div class="whc_topline">
+									<div id="time-style">Time: <span id="time-display">10</span>
+									</div>
+									<div id="wordtype-style">Word Type: <span id="wordtype-display">10</span>
+									</div>
+									<div id="round-style">
+										Round: <span id="round-display">5</span>
+									</div>
+								</div>
+								<div id="wordHint-display">
+								</div>
+							</div>
+							<div id="cnvas-score-chat-cont" class="ingame-elems-aligner">
+								<div id="Scoreboard" class="ingame-element">
+								</div>
+								<div id="game-canvas">
+									<div id="canvasAndPaint">
+										<canvas id="myCanvas" width="650" height="400"
+											style="border:1px solid #2B7A78; background-color:#f2f3f3;" class="cu_cus">
+										</canvas>
+										<div id="drawOptions-cont">
+											<button class="btn btn-default drawop-btn border border-secondary sizebtn"
+												type="button" value="2" id="cus"></button>
+											<button class="btn btn-default drawop-btn border border-secondary sizebtn"
+												type="button" value="4" id="cum"></button>
+											<button class="btn btn-default drawop-btn border border-secondary sizebtn"
+												type="button" value="6" id="cub"></button>
+											<button class="btn btn-default drawop-btn border border-secondary"
+												type="button" id="eraser"></button>
+											<button class="btn btn-default drawop-btn border border-secondary"
+												type="button" id="floodfill"></button>
+											<div id="colors-draw">
+												<div class="color-row" style="margin-right: 1px;">
+													<button type="button" class="color-b" value="#0000FF" />
+													<!--
+													--><button type="button" class="color-b" value="#FF0000" />
+													<!--
+													--><button type="button" class="color-b" value="#FFD700" />
+													<!--
+													--><button type="button" class="color-b" value="#008000" />
+													<!--
+													--><button type="button" class="color-b" id="initCanvasBtn" value="#000000" />
+													<!--
+													--><button type="button" class="color-b" value="#808080" />
+												</div>
+												<div class="color-row"><button type="button" class="color-b"
+														value="#800080" />
+													<!--
+													--><button type="button" class="color-b" value="#A52A2A" />
+													<!--
+													--><button type="button" class="color-b" value="#00008B" />
+													<!--
+													--><button type="button" class="color-b" value="#FFA500" />
+													<!--
+													--><button type="button" class="color-b" value="#FFFFFF" />
+													<!--
+													--><button type="button" class="color-b" value="#00FFFF" />
+												</div>
+											</div>
+											<input id="cus-color" class="colorSel" style="width:42px; height: 23px;"
+												type="color" value="#ff0000">
+											<button class="btn btn-default drawop-btn border border-secondary"
+												type="button" id="clear-canv"></button>
+										</div>
+									</div>
+									<input type="text" class="form-control" id="guess-text"
+										placeholder="Type a guess ..">
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					<div class="modal fade" id="wg-modal" data-backdrop="static" data-keyboard="false">
+						<div class="modal-dialog modal-dialog-centered modal-lg">
+							<div class="modal-content modal-cus">
+								<!-- Modal body -->
+								<div class="modal-header" style="display: inline;">
+									<h4 class="modal-title modal-title-cus">Choose a word <div id="timer-cw"
+											style="float:right;">120<div></div>
+									</h4>
+								</div>
+								<div class="modal-body" id="wg-mod-cont">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="sc-modal" data-backdrop="static" data-keyboard="false">
+						<div class="modal-dialog modal-dialog-centered modal-lg">
+							<div class="modal-content modal-cus">
+								<!-- Modal body -->
+								<div class="modal-header" style="display: inline;">
+									<h4 class="modal-title modal-title-cus">Result
+									</h4>
+								</div>
+								<div class="modal-body" id="wg-mod-cont">
+									<div id="top_1"> 1 playerone </div>
+									<div class="Toppers">
+										<div></div>
+										<div id="top_2">2 PlayerTwo</div>
+										<div></div>
+										<div id="top_3">3 playerThree</div>
+										<div></div>
+									</div>
+									<div class="double-equals-columns">
+										<div id="sc-fh" class="forms-half-aligned">
+											<div class="top_4">4 rest</div>
+											<div class="top_4">5 rest</div>
+											<div class="top_4">6 rest</div>
+										</div>
+										<div id="sc-sh" class="forms-half-aligned">
+											<div class="top_4">7 rest</div>
+											<div class="top_4">8 rest</div>
+											<div class="top_4">9 rest</div>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="chatbox">
+					<div id="messageCont" class="messagesChatbox">
+
+					</div>
+					<input type="text" id="message-inp" maxlength="40" placeholder="type message">
+				</div>
+			</div>
+
+			<div id="ffBox" style="display: none;">
+				<p class="centered-title" style="color: #FEFFFF; font-weight: bold;">Vote : Go back to lobby ?</p>
+				<div id="ffvote" style="">
+					<div id="fftime" class="round-time-bar" data-style="smooth" style="--duration: 5;">
+						<div class="time-bar"></div>
+					</div>
+					<div class="btn-cont" style="margin-top: 5px"><button type="button" id="gbtlbtn-y"
+							class="btn btn-outline-custom btn-sm">Yes</button>
+						<button type="button" class="btn btn-outline-custom btn-sm" id="gbtlbtn-n"
+							style="margin-left: 10px;">No</button>
+					</div>
+				</div>
+				<div id="ffres"
+					style="text-align: center; color: #FEFFFF; font-size: 0.9rem; margin-top: 6px; display: none;">
+
+				</div>
+
+			</div>
+		</div>
+
+		<div id="View-botbar" class="botbar" style="overflow: inherit;">
+			<div class="btn-group dropup bottom-right">
+				<button type="button" class="dropdown-toggle bar-button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false" id="botbar_username" style="padding-top: 0; padding-bottom: 0;">
+					Username
+				</button>
+				<div class="dropdown-menu" style="background-color: inherit;">
+					<!--button class="dropdown-item">Profile</button-->
+					<button id="open_Accsettings_but" class="dropdown-item">Settings</button>
+					<button id="logoutbtn" class="dropdown-item">Logout</button>
+				</div>
+			</div>
+
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!-- Jquery-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script><!-- popper-->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script><!-- Bootsrap-->
+		
+		<!--Boostrap autocomplete-->
+		<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui.structure.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui.theme.min.css" />
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/libraries/jquery-ui.min.js"></script>
+		<script src="https://cdn.inkdove.com/script/constants.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Shared/util.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Shared/loadingScreen.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Shared/animations.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Shared/socket.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Shared/errorHandler.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Shared/sceneTransitioner.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Shared/userData.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Shared/topWindow.js"></script>
+
+		<script src="https://cdn.inkdove.com/script/Components/objects/rbRoom.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/objects/room.js"></script>
+
+		<script src="https://cdn.inkdove.com/script/Components/Settings/bottombar.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Settings/accountSettings.js"></script>
+
+		<script src="https://cdn.inkdove.com/script/Components/Roombrowser/roombrowser.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Roombrowser/hostRoom.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Roombrowser/roomFilter.js"></script>
+
+		<script src="https://cdn.inkdove.com/script/Components/Chat/gamechat.js"></script>
+
+		<script src="https://cdn.inkdove.com/script/Components/Lobby/lobby.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Lobby/roomsettings.js"></script>
+
+		<script src="https://cdn.inkdove.com/script/Components/Game/util/animeregex.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Game/canvas.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Game/AutoComplete.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Game/guessWord.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Game/soundHandler.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Game/hintsbar.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Game/scoreboard.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Game/topBar.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Game/ffvote.js"></script>
+		<script src="https://cdn.inkdove.com/script/Components/Game/wordChoice.js"></script>
+
+
+		<script src="https://cdn.inkdove.com/script/Components/init.js"></script>
+
+	</div>
+
+</body>
